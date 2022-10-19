@@ -1,18 +1,44 @@
 body{
     margin: 0;
     font-family: 'Georgia serif';
+    background-color: rgba(243, 177, 54, 0.082);
+}
+.menu{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(252, 253, 187);
+}
+.logo{
+    font-size: 40px;
+}
+.menu_item{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgb(252, 253, 187);
+    color: #888;
+    font-weight: 800;
+}
+.menu_item div{
+    margin:0px 5px;
+    padding: 14px;
+    font-size: 20px;
+}
+.wraper_content{
+    position: relative;
+    top: 40px;
     display: flex;
     justify-content: center;
 }
-.wraper_content{
-    position: absolute;
-    top:5%;
-    
-}
 .cats{
     position: relative;
-    top:3%;
-    left: 5%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 50px;
@@ -24,17 +50,17 @@ body{
     border-radius: 10px;
 }
 .cat_cart{
+    background-color: rgba(252, 253, 187, 0.699);
     width: 340px;
     height: 300px;
-    border: 1px solid #aaa;
-    box-shadow: 0px 0px 8px 0px #aaa;
+    border: 1px solid #aaa5;
+    box-shadow: 0px 0px 6px 0px #aaa4;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     transition: upp 1s 5s linear;
-    opacity: 0.7;
 }
 .upp{
     transform: scale(1);
@@ -48,11 +74,22 @@ body{
     width: 300px;
     height: 250px;
 }
-.wrap_info_cart{
+.wrapper_page_info{
     position: fixed;
-    padding: 20px 40px;
-    top:27%;
-    left:26%;
+    background-color: rgba(243, 177, 54, 0.151);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+.wrap_info_cart{
+    position: relative;
+    top: calc(50% -125px);
+    padding: 20px;
     width: 700px;
     height: 350px;
     background: rgb(252, 253, 187);
@@ -63,17 +100,21 @@ body{
     border: 2px solid #aaa ;
     border-radius: 10px;
 }
-.wrap_info_cart img{
+.wrap_info_cart button{
     position: absolute;
     right: 2%;
     top: 2%;
+    background-color:rgb(250, 225, 158);
+    border: 1px solid rgb(250, 225, 158);
+    color: rgb(71, 67, 58);
+    font-weight: 800;
+    border-radius: 10px;
 }
 .wrap_info_cart p{
     font-family: 'Arial ';
     font-size: 22px;
     letter-spacing: -0.8;
 }
-
 
 .content_info{
     display: grid;

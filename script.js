@@ -49,7 +49,6 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                 
                 const img = document.createElement('div');
                 img.style.background = `url('${cat.img_link}') no-repeat center / cover `;
-                img.style.opacity = '0.8'
                 img.classList.add('cat_img');
                 
                 const wrap_card = document.createElement('div');
@@ -66,41 +65,41 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                 let noneRate = 10 - rate_cat;
                 let save_darck = '', save_light = '' ;
                 while(rate_cat){
-                    save_darck += '<i class="fa-solid fa-heart"></i>';
+                    save_darck += '<i class="fa-solid fa-heart" style ="color: #4b3d9b;"></i>';
                     rate_cat--;
                 }
                 div_icon.style.color = '#aaa';
                 while (noneRate){
-                    save_light += '<i class="fa-regular fa-heart"></i>';
+                    save_light += '<i class="fa-regular fa-heart" style ="color: #4b3d9b;"></i>';
                     noneRate--;
                 }
                 div_icon.innerHTML = save_darck + save_light;
 
                 wrap_card.append(div_icon)
                 
-                cats.append(wrap_card);  
-                
+                cats.append(wrap_card);                  
             })
             
             
             const cards = [...document.querySelectorAll('.cat_cart')];
             cards.forEach(card =>{
                 card.addEventListener('mouseover', () =>{
-                    card.style.transform = 'scale(1.19)';
-                    card.style.opacity = '1.0'; 
+                    card.style.transform = 'scale(1.19)'; 
                 })
                 card.addEventListener("mouseout", function(){
                     card.style.transform = 'scale(1)';
-                    card.style.opacity = '0.7'; 
                 })
                 
                 card.addEventListener("click", 
                 //create card cat width info
                 function createInfoCart(){
+                    const wrap = document.createElement('div');
+                    wrap.className = 'wrapper_page_info'
                     const wrapInfoCart = document.createElement('div');
                     wrapInfoCart.classList.add('wrap_info_cart');
-                    const elementExit = document.createElement('img');
-                    elementExit.setAttribute('src','img/signboard.png')
+                    wrap.append(wrapInfoCart);
+                    const elementExit = document.createElement('button');
+                    elementExit.textContent = 'Close'
                     wrapInfoCart.append(elementExit)
                     const contentInfo = document.createElement('div');
                     contentInfo.classList.add('content_info')
@@ -118,11 +117,25 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                     contentInfo.append(info);
                     wrapInfoCart.append(contentInfo)
                     wrapInfoCart.setAttribute('z-index', 3)
-                    document.body.appendChild(wrapInfoCart);
+                    document.body.appendChild(wrap);
+
+                    const iconClose = document.querySelector('.wrap_info_cart button');
+                    console.log(iconClose);
+                    
+                    iconClose.addEventListener('click', function(){
+                        wrap.remove();   
+                    })
+                    
+                    // const wraperContent = document.querySelector('.wraper_content');
+                    // wraperContent.addEventListener("click",function(){
+                    //     if (wrapInfoCart.innerHTML){
+                    //         wrapInfoCart.remove();
+                    //     } 
+                    // })
                 })
+                
             })
-            // const iconClose = document.querySelector('.wrap_info_cart');
-            // console.log(iconClose)
+            
         }
     })
     .catch(err => console.log(err))
