@@ -66,6 +66,7 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                 wrap_card.classList.add('cat_cart');
                 wrap_card.setAttribute('data-index', i)
                 wrap_card.append(img);
+
                 const name = document.createElement('h1');
                 name.innerHTML = cat.name;
                 wrap_card.append(name);
@@ -137,7 +138,10 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                     })
                     wrap.addEventListener('click',function(e){
                         e.stopPropagation()
-                        e.target.remove()
+                        console.log(e.target);
+                        if(e.target.classList.contains('wrapper_page_info')){
+                            wrap.remove()
+                        } 
                     })
                 })
             })
