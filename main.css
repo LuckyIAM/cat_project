@@ -25,11 +25,12 @@ body{
     background: rgb(252, 253, 187);
     color: #888;
     font-weight: 800;
+    cursor: pointer;
 }
 .menu_item div{
     margin:0px 5px;
     padding: 14px;
-    font-size: 20px;
+    font-size: 20px; 
 }
 .wraper_content{
     position: relative;
@@ -92,7 +93,7 @@ body{
     padding: 20px;
     width: 700px;
     height: 350px;
-    background: rgb(252, 253, 187);
+    background: #fcfdbb;
     z-index: 0;
     display: flex;
     justify-content: center;
@@ -100,25 +101,69 @@ body{
     border: 2px solid #aaa ;
     border-radius: 10px;
 }
-.wrap_info_cart button{
+.btn_close{
     position: absolute;
     right: 2%;
     top: 2%;
-    background-color:rgb(250, 225, 158);
+    background-color:#fae19e;
     border: 1px solid rgb(250, 225, 158);
     color: rgb(71, 67, 58);
     font-weight: 800;
     border-radius: 10px;
+}
+.rotate{
+    transition: transform ;
+    transform: rotate(45deg);
 }
 .wrap_info_cart p{
     font-family: 'Arial ';
     font-size: 22px;
     letter-spacing: -0.8;
 }
-
 .content_info{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     z-index: 4;  
+}
+.wraper_form{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* backdrop-filter: blur(2px); */
+    background: #ffffe4;
+    display: none;
+}
+.conteiner_form{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    
+}
+.conteiner_form>.form{
+    position: relative;
+    top: calc(50vh - 250px);
+    left: calc(50vw - 175px);
+    width: 250px;
+    height: auto;
+    background: #fcfdbb;
+    padding: 20px 40px;
+}
+.columns{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 5px;
+}
+
+button{
+    background-color:rgb(250, 225, 158);
+    border: 1px solid rgb(250, 225, 158);
+    color: rgb(71, 67, 58);
+    font-weight: 800;
+    border-radius: 10px;
+}
+.active{
+    display: block;
 }

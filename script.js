@@ -20,7 +20,18 @@ function rightRead(num, q = 'меньше года', w = 'год', e = "года
         return r;
     }
 }
-console.log(rightRead(3));
+
+const menu  = [...document.querySelectorAll('.menu_item div')]
+const wraperForm = document.querySelector('.wraper_form');
+menu[0].addEventListener('click', function(){
+    wraperForm.classList.add('active')
+})
+
+const exitForm = document.querySelector('.exit')
+console.log(exitForm);
+exitForm.addEventListener('click',function(){
+    wraperForm.classList.remove('active')
+})
 
 fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/add', {
     method: "POST",
@@ -65,12 +76,12 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                 let noneRate = 10 - rate_cat;
                 let save_darck = '', save_light = '' ;
                 while(rate_cat){
-                    save_darck += '<i class="fa-solid fa-heart" style ="color: #4b3d9b;"></i>';
+                    save_darck += '<i class="fa-solid fa-heart" style ="color: #172be0;"></i>';
                     rate_cat--;
                 }
                 div_icon.style.color = '#aaa';
                 while (noneRate){
-                    save_light += '<i class="fa-regular fa-heart" style ="color: #4b3d9b;"></i>';
+                    save_light += '<i class="fa-regular fa-heart" style ="color: #172be0;"></i>';
                     noneRate--;
                 }
                 div_icon.innerHTML = save_darck + save_light;
@@ -100,6 +111,7 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                     wrap.append(wrapInfoCart);
                     const elementExit = document.createElement('button');
                     elementExit.textContent = 'Close'
+                    elementExit.className ='btn_close'
                     wrapInfoCart.append(elementExit)
                     const contentInfo = document.createElement('div');
                     contentInfo.classList.add('content_info')
@@ -120,22 +132,15 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                     document.body.appendChild(wrap);
 
                     const iconClose = document.querySelector('.wrap_info_cart button');
-                    console.log(iconClose);
-                    
                     iconClose.addEventListener('click', function(){
                         wrap.remove();   
                     })
-                    
-                    // const wraperContent = document.querySelector('.wraper_content');
-                    // wraperContent.addEventListener("click",function(){
-                    //     if (wrapInfoCart.innerHTML){
-                    //         wrapInfoCart.remove();
-                    //     } 
-                    // })
+                    wrap.addEventListener('click',function(e){
+                        e.stopPropagation()
+                        e.target.remove()
+                    })
                 })
-                
             })
-            
         }
     })
     .catch(err => console.log(err))
