@@ -138,7 +138,6 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                     })
                     wrap.addEventListener('click',function(e){
                         e.stopPropagation()
-                        console.log(e.target);
                         if(e.target.classList.contains('wrapper_page_info')){
                             wrap.remove()
                         } 
