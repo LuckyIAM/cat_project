@@ -1,13 +1,4 @@
-
-let kitty = {
-    id: 11,
-    name: "Цветок",
-    img_link: "https://pets2.me/media/res/3/4/9/5/3495.ovt9pc.840.jpg",
-    age: 0.3,
-    rate: 10,
-    description: "Мой будущий катенок =)",
-    favourite: true
-}
+import Api from "./api.js"
 
 function rightRead(num, q = 'меньше года', w = 'год', e = "года", r = 'лет'){
     if(num < 1){
@@ -21,78 +12,71 @@ function rightRead(num, q = 'меньше года', w = 'год', e = "года
     }
 }
 
+
+const api = new Api('q1o');
+const formAdd = document.forms.add;
+function addCatInBd(form, store){
+    let body = {};
+    form.addEventListener('submit',function(e){
+        e.preventDefault();
+        for(let i=0; i<e.target.elements.length; i++){
+            let el = e.target.elements[i];
+            if(el.name){
+                if(el.type === 'checked'){
+                    body[el.name] = el.checked;
+                }else{
+                    body[el.name] = el.value;
+                }
+            }
+        }
+    })
+    console.log(body);
+    
+    api.addCat(body)
+    .then(res => {
+        console.log(res.json())
+        res.json()
+    })
+    .then(data =>{
+        if(data.message === 'ok'){
+            console.log(data.message, data);
+            const card = document.querySelector('.cats')
+            // console.log(body, card.children.length + 1, card);
+            createCatCard(body, document.querySelector('.cats').children.length , document.querySelector('.cats'));
+            store = store.push(body);
+            console.log(store);
+            localStorage.setItem('cats', JSON.stringify(store))
+            // form.reset();
+        }
+   })  
+}
+
+let catsList = []
+
 const menu  = [...document.querySelectorAll('.menu_item div')]
 const wraperForm = document.querySelector('.wraper_form');
 menu[0].addEventListener('click', function(){
-    wraperForm.classList.add('active')
+    wraperForm.classList.add('active');
+    addCatInBd(formAdd, catsList);
 })
 
 const exitForm = document.querySelector('.exit')
-console.log(exitForm);
 exitForm.addEventListener('click',function(){
     wraperForm.classList.remove('active')
 })
 
-fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/add', {
-    method: "POST",
-    headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(kitty)
-})
-    .then(q => q.json())
-    .then(result =>{
-    if(result.ok){
-        console.log(result)
-    }
-})
 
-fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
-    
+
+
+api.showCats()
     .then(r => r.json())
-    
     .then(result => {
         if(result.message === 'ok'){  
             console.log(result);
             const cats = document.querySelector('.cats');
-            result.data.forEach((cat, i) =>{
-                
-                const img = document.createElement('div');
-                img.style.background = `url('${cat.img_link}') no-repeat center / cover `;
-                img.classList.add('cat_img');
-                
-                const wrap_card = document.createElement('div');
-                wrap_card.classList.add('cat_cart');
-                wrap_card.setAttribute('data-index', i)
-                wrap_card.append(img);
-
-                const name = document.createElement('h1');
-                name.innerHTML = cat.name;
-                wrap_card.append(name);
-
-                const div_icon = document.createElement('div'); 
-                div_icon.classList.add('icon_rate')
-                let rate_cat = cat.rate;
-                let noneRate = 10 - rate_cat;
-                let save_darck = '', save_light = '' ;
-                while(rate_cat){
-                    save_darck += '<i class="fa-solid fa-heart" style ="color: #172be0;"></i>';
-                    rate_cat--;
-                }
-                div_icon.style.color = '#aaa';
-                while (noneRate){
-                    save_light += '<i class="fa-regular fa-heart" style ="color: #172be0;"></i>';
-                    noneRate--;
-                }
-                div_icon.innerHTML = save_darck + save_light;
-
-                wrap_card.append(div_icon)
-                
-                cats.append(wrap_card);                  
+            result.data.forEach((cat, i)=>{
+                createCatCard(cat, i , cats)
             })
-            
-            
             const cards = [...document.querySelectorAll('.cat_cart')];
             cards.forEach(card =>{
                 card.addEventListener('mouseover', () =>{
@@ -132,6 +116,8 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                     wrapInfoCart.setAttribute('z-index', 3)
                     document.body.appendChild(wrap);
 
+                    
+
                     const iconClose = document.querySelector('.wrap_info_cart button');
                     iconClose.addEventListener('click', function(){
                         wrap.remove();   
@@ -142,10 +128,14 @@ fetch('https://sb-cats.herokuapp.com/api/2/LuckyIAM/show')
                             wrap.remove()
                         } 
                     })
+                    
                 })
             })
+        }else{
+            console.log(result.message)
         }
+        
     })
-    .catch(err => console.log(err))
+   
 
 

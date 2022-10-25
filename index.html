@@ -9,6 +9,7 @@
     integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" 
     crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="main.css">
+    <script src="function.js"></script>
 </head>
 <body>
     <nav class="menu">
@@ -25,10 +26,12 @@
         <div class="cats"></div>
         </div>
     </main>
+
     <div class="wraper_form">
         <div class="conteiner_form">
-            <form class="form">
+            <form id="add" class="form">
                 <button class="btn_close rotate exit">+</button>
+                <h2>Добавить Кота</h2>
                 <div class="columns">
                     <label for="i1">Имя кота</label>
                     <input type="text" id="i1" name="name" required>
@@ -39,11 +42,11 @@
                 </div>
                 <div class="columns">
                     <label for="i3">Ссылка на картинку</label>
-                    <input type="text" id="i3" name="img_link" required>
+                    <input type="text" id="i3" name="img_link">
                 </div>
                 <div class="columns">
                     <label for="i4">Возраст кота</label>
-                    <input type="number" id="i4" name="age" min="0" max="100" required>
+                    <input type="number" id="i4" name="age" min="0" max="100" >
                 </div>
                 <div class="columns">
                     <label for="i5">Рейтинг</label>
@@ -59,8 +62,20 @@
                 <button type="submit">Добавить кота</button>
             </form>
         </div>
+        <div class="wraper_form">
+            <div class="conteiner_form">
+                <form id="delete" class="form" >
+                    <button class="btn_close rotate exit">+</button>
+                    <h2>Удалить Кота</h2>
+                    <div class="columns">
+                        <label for="i1">Идентификатор/Id</label>
+                        <input type="text" id="i1" name="name" required>
+                    </div>
+                    <button type="submit">Добавить кота</button>
+                </form>
+            </div>
     </div>
-
- <script src="script.js"></script>
+ 
+ <script src="script.js" type="module"></script>
 </body>
 </html>
