@@ -3,18 +3,17 @@ class Api{
         this.name = name;
         this.path = "https://sb-cats.herokuapp.com/api/2/";
     }
-    addCat(body){
+    addCat(self){
         return fetch(`${this.path}${this.name}/add`, {
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(self)
         })
     }
     showCats(){
-        console.log("fetch('https://sb-cats.herokuapp.com/api/2/zavalisca/show')");
 
         return fetch(`${this.path}${this.name}/show`);
 

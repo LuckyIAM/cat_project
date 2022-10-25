@@ -13,7 +13,7 @@ function rightRead(num, q = 'меньше года', w = 'год', e = "года
 }
 
 
-const api = new Api('q1o');
+const api = new Api('LuckyIAM');
 const formAdd = document.forms.add;
 function addCatInBd(form, store){
     let body = {};
@@ -22,33 +22,29 @@ function addCatInBd(form, store){
         for(let i=0; i<e.target.elements.length; i++){
             let el = e.target.elements[i];
             if(el.name){
-                if(el.type === 'checked'){
+                if(el.type === 'checkbox'){
                     body[el.name] = el.checked;
-                }else{
+                }else if(el.value){
                     body[el.name] = el.value;
                 }
             }
         }
-    })
-    console.log(body);
-    
-    api.addCat(body)
-    .then(res => {
-        console.log(res.json())
-        res.json()
-    })
-    .then(data =>{
-        if(data.message === 'ok'){
-            console.log(data.message, data);
-            const card = document.querySelector('.cats')
-            // console.log(body, card.children.length + 1, card);
-            createCatCard(body, document.querySelector('.cats').children.length , document.querySelector('.cats'));
-            store = store.push(body);
-            console.log(store);
-            localStorage.setItem('cats', JSON.stringify(store))
-            // form.reset();
-        }
-   })  
+        console.log(body);
+        api.addCat(body)
+            .then(res => res.json())
+            .then(data =>{
+                if(data.message === 'ok'){
+                    console.log(data.message, data);
+                    const card = document.querySelector('.cats')
+                    createCatCard(body, document.querySelector('.cats').children.length , document.querySelector('.cats'));
+                    store = store.push(body);
+                    console.log(store);
+                    localStorage.setItem('cats', JSON.stringify(store))
+                    form.reset();
+                }
+            })
+        })
+      
 }
 
 let catsList = []
@@ -57,7 +53,7 @@ const menu  = [...document.querySelectorAll('.menu_item div')]
 const wraperForm = document.querySelector('.wraper_form');
 menu[0].addEventListener('click', function(){
     wraperForm.classList.add('active');
-    addCatInBd(formAdd, catsList);
+    addCatInBd(formAdd, catsList)
 })
 
 const exitForm = document.querySelector('.exit')
@@ -136,6 +132,3 @@ api.showCats()
         }
         
     })
-   
-
-
