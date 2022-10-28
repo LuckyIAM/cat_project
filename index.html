@@ -27,7 +27,7 @@
         </div>
     </main>
 
-    <div class="wraper_form">
+    <div class="wraper_form popup">
         <div class="conteiner_form">
             <form id="add" class="form">
                 <button class="btn_close rotate exit">+</button>
@@ -62,18 +62,75 @@
                 <button  class = 'send' type="submit">Добавить кота</button>
             </form>
         </div>
-        <div class="wraper_form">
-            <div class="conteiner_form">
-                <form id="delete" class="form" >
-                    <button class="btn_close rotate exit">+</button>
-                    <h2>Удалить Кота</h2>
-                    <div class="columns">
-                        <label for="i1">Идентификатор/Id</label>
-                        <input type="text" id="i1" name="name" required>
-                    </div>
-                    <button type="submit">Добавить кота</button>
-                </form>
-            </div>
+    </div>
+    <div class="wraper_form_delete popup">
+        <div class="conteiner_form">
+            <form id="delete" class="form" >
+                <button class="btn_close rotate exit">+</button>
+                <h2>Удалить Кота</h2>
+                <div class="columns">
+                    <label for="i1">Идентификатор/Id</label>
+                    <input type="number" id="i1" name="id" required >
+                </div>
+                <button type="submit">Удалить кота</button>
+            </form>
+        </div>
+    </div>
+    <div class="wraper_form_update popup">
+        <div class="conteiner_form">
+            <form id="update" class="form">
+                <button class="btn_close rotate exit">+</button>
+                <h2>Изменить Кота</h2>  
+                <div class="columns">
+                    <label for="i1"><span style="color:brown;">Води id кота которого хочешь изменить<sup>*</sup></span></label>
+                    <input type="number" id="i1" name="id" required>
+                </div>              
+                <div class="columns">
+                    <label for="i2">Имя кота</label>
+                    <input type="text" id="i2" name="name">
+                </div>
+                <div class="columns">
+                    <label for="i3">Ссылка на картинку</label>
+                    <input type="text" id="i3" name="img_link">
+                </div>
+                <div class="columns">
+                    <label for="i4">Возраст кота</label>
+                    <input type="number" id="i4" name="age" min="0" max="100" >
+                </div>
+                <div class="columns">
+                    <label for="i5">Рейтинг</label>
+                    <input type="number" id="i5" name="rate" min="0" max="10">
+                </div>
+                <div class="columns">
+                    <label for="i6">Любимчик <input type="checkbox" id="i6" name="favourite"></label>
+                </div>
+                <div class="columns">
+                    <label for="i7">Описание кота</label>
+                    <textarea type="text" id="i7" name="description"></textarea>
+                </div>
+                <button  class = 'send' type="submit">Изменить кота</button>
+            </form>
+        </div>
+    </div>
+    <div class="wraper_form_filter popup">
+        <div class="conteiner_form">
+            <form id="filter" class="form">
+                <button class="btn_close rotate exit">+</button>
+                <h2>Укажи параметры желаемого кота</h2>
+                <div class="columns">
+                    <label for="i4">Возраст кота</label>
+                    <input type="number" id="i4" name="age" min="0" max="100" >
+                </div>
+                <div class="columns">
+                    <label for="i5">Рейтинг от 0 до 10</label>
+                    <input type="number" id="i5" name="rate" min="0" max="10">
+                </div>
+                <div class="columns">
+                    <label for="i6">Любимчик <input type="checkbox" id="i6" name="favourite"></label>
+                </div>
+                <button  class = 'send' type="submit">Изменить кота</button>
+            </form>
+        </div>
     </div>
  
  <script src="script.js" type="module"></script>

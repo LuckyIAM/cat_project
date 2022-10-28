@@ -20,7 +20,7 @@ class Api{
     }
     upCat(id, body){
         return fetch(`${this.path}${this.name}/update/${id}`, {
-            method:"POST",
+            method:"PUT",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json"

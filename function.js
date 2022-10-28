@@ -1,6 +1,6 @@
 function createCatCard (cat, i, parentElement){           
     const img = document.createElement('div');
-    img.style.background = `url('${cat.img_link}') no-repeat center / cover `;
+    img.style.background = `url('${cat.img_link}') no-repeat center / cover ` || `url('${img/cat.ipg}') no-repeat center / cover ` ;
     img.classList.add('cat_img');
     
     const wrap_card = document.createElement('div');
