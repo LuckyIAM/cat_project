@@ -204,22 +204,40 @@ function upCatToBd(form){
 function cheoseCat(form){
     const allcat = JSON.parse(localStorage.getItem('catsExist'));
     const filterCats = document.forms.filter;
-    let chooseCats = [];
+    let chooseCatsAge = [];
+    let chooseCatsRate=[];
+    let chooseCatsFavourite = []
     form.addEventListener('submit', e =>{
         e.preventDefault();
         for(let i = 0; i<e.target.elements.length; i++){
             let tag = e.target.elements[i];
-            console.log(tag);
             for(let c = 0; c<allcat.length;c++){
-                console.log(allcat[c].age, tag.value, tag.name);
                 if(tag.name === 'age' && allcat[c].age === Number(tag.value)){
-                    console.log(allcat[c].age, tag.value, tag.name);
-                    chooseCats.push(allcat[c])
-                }if(tag.name ==='rate' && allcat[[c].rate === tag.value]){
-
+                    chooseCatsAge.push(allcat[c])
+                    console.log(chooseCatsAge);
                 }
             }
+            for(let r = 0; r<chooseCatsAge.length; r++){
+                if(tag.name ==='rate' && chooseCatsAge[r].rate === Number(tag.value)){
+                    chooseCatsRate.push(chooseCatsAge[r])
+                    console.log(chooseCatsRate)
+                }
+            }
+            for(let f = 0; f<chooseCatsRate.length; f++){
+                const save_value = chooseCatsRate[f].favourite;
+                console.log(tag.type, chooseCatsRate[f].favourite, tag.value);
+                if(tag.type === 'checkbox' ){
+    
+                    chooseCatsRate[f].favourite = tag.checked;
+                    console.log(chooseCatsRate[f].favourite);                
+                }
+                    if(tag.name ==='favourite' && chooseCatsRate[f].favourite === save_value){
+                        chooseCatsFavourite.push(chooseCatsRate[f])
+                    }
+                
+            }        
         }
+        console.log(chooseCatsFavourite);
     })
     
     
