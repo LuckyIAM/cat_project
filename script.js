@@ -203,33 +203,71 @@ function upCatToBd(form){
 
 function cheoseCat(form){
     const allcat = JSON.parse(localStorage.getItem('catsExist'));
-    const filterCats = document.forms.filter;
+    
+    const wraperChoosCats = document.querySelector('.wraper_choose_cats');
+    const wrpprChoose = document.querySelector('.wrap__choose');
+    const containerChooseCat = document.createElement('div');
+    containerChooseCat.className = 'choose_content';
     let chooseCatsAge = [];
     let chooseCatsRate=[];
-    let chooseCatsFavourite = []
+    let chooseCatsFavourite = [];
     form.addEventListener('submit', e =>{
         e.preventDefault();
+        if(chooseCatsAge.length !== 0 && chooseCatsRate.length !== 0 && chooseCatsFavourite.length !== 0){
+            chooseCatsAge=[];
+            chooseCatsRate=[];
+            chooseCatsFavourite=[];
+        }
         for(let i = 0; i<e.target.elements.length; i++){
             let tag = e.target.elements[i];
             for(let c = 0; c<allcat.length;c++){
-                if(tag.name === 'age' && allcat[c].age === Number(tag.value)){
+                if(tag.name === 'age' && (/^[0-9]{1,2}-[0-9]{1,2}/).test(tag.value)){
+                    // console.log(tag.value);
+                    let min_value = +tag.value.split('-')[0];
+                    let max_value = +tag.value.split('-')[1];
+                    // console.log(min_value, max_value);
+                    for(let j = min_value; j<=max_value; j++){
+                        // console.log(j, allcat[c].age );
+                        if(allcat[c].age === j){
+                            chooseCatsAge.push(allcat[c])
+                            // console.log(chooseCatsAge);
+                        }
+                    }
+                    
+                // }else if(tag.name === 'age' && (/[0-9]{1,2}/).test(tag.value)){
+                //     const warning = document.createElement('h3');
+                //     warning.innerHTML = `Вводите данные в формате "число"-"число". Пример: 5-10`;
+                //     containerChooseCat.append(warning);
+
+                }else if(tag.name === 'age' && tag.value === ''){
                     chooseCatsAge.push(allcat[c])
-                    console.log(chooseCatsAge);
                 }
+                
             }
             for(let r = 0; r<chooseCatsAge.length; r++){
-                if(tag.name ==='rate' && chooseCatsAge[r].rate === Number(tag.value)){
+                if(tag.name ==='rate' && (/^[0-9]{1,2}-[0-9]{1,2}/).test(tag.value)){
+                    // console.log(tag.value);
+                    let min_value_rate = +tag.value.split('-')[0];
+                    let max_value_rate = +tag.value.split('-')[1];
+                    for(let z = min_value_rate; z<=max_value_rate; z++){
+                        // console.log(z, chooseCatsAge[r].rate);
+                        if(chooseCatsAge[r].rate === z){
+                            chooseCatsRate.push(chooseCatsAge[r]);
+                            // console.log(chooseCatsRate);
+                        }
+                    }
+                    
+                }else if(tag.name ==='rate' && tag.value === ''){
                     chooseCatsRate.push(chooseCatsAge[r])
-                    console.log(chooseCatsRate)
                 }
             }
             for(let f = 0; f<chooseCatsRate.length; f++){
                 const save_value = chooseCatsRate[f].favourite;
-                console.log(tag.type, chooseCatsRate[f].favourite, tag.value);
+                // console.log(tag.type, chooseCatsRate[f].favourite, tag.value);
                 if(tag.type === 'checkbox' ){
     
                     chooseCatsRate[f].favourite = tag.checked;
-                    console.log(chooseCatsRate[f].favourite);                
+                    //console.log(chooseCatsRate[f].favourite);                
                 }
                     if(tag.name ==='favourite' && chooseCatsRate[f].favourite === save_value){
                         chooseCatsFavourite.push(chooseCatsRate[f])
@@ -238,9 +276,57 @@ function cheoseCat(form){
             }        
         }
         console.log(chooseCatsFavourite);
+
+        if(chooseCatsFavourite.length ===0){
+            containerChooseCat.innerHTML = `<p style="font-size: 25px; text-align: center;"> 
+            Катов с такими параметрами не обнаружено!</p>`
+        } else{
+            for(let cat = 0; cat<chooseCatsFavourite.length; cat++){
+                console.log(chooseCatsFavourite[cat]);
+    
+                const catChoose = document.createElement('div');
+                catChoose.className = 'cat_choose';
+    
+                const leftCard = document.createElement('div');
+                leftCard.className = 'left_card';
+                    
+                const rightCard = document.createElement('div');
+                rightCard.className = 'right_card';
+    
+                const imgChoose = document.createElement('img');
+                imgChoose.className = 'choose_img';
+                imgChoose.setAttribute("src",chooseCatsFavourite[cat].img_link);
+                
+                const nameChoose = document.createElement('h3');
+                nameChoose.textContent = chooseCatsFavourite[cat].name;
+    
+                const rateChoose = document.createElement('p');
+                rateChoose.innerHTML = `Рейтинг: ${chooseCatsFavourite[cat].rate}`;
+    
+                leftCard.append(imgChoose, nameChoose)
+    
+                const favouriteChoose = document.createElement('p');
+                const favouriteValue = chooseCatsFavourite[cat].favourite ? "Да" : "Нет";
+                favouriteChoose.innerHTML = `Любимчик: ${favouriteValue}`
+    
+                const descriptionChoose = document.createElement('div');
+                descriptionChoose.className = "bottum_card";
+                descriptionChoose.innerHTML = chooseCatsFavourite[cat].description;
+    
+                rightCard.append(rateChoose, favouriteChoose);
+                catChoose.append(leftCard, rightCard, descriptionChoose);  
+                containerChooseCat.append(catChoose);
+            }
+        }
+
+        wrpprChoose.append(containerChooseCat);
+        
+        wraperChoosCats.append(wrpprChoose);
+        wraperChoosCats.classList.add('active')
+        
+        e.target.reset();
     })
-    
-    
+
     close(form)
 }
 

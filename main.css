@@ -23,7 +23,7 @@ body{
     justify-content: flex-end;
     align-items: center;
     background: rgb(252, 253, 187);
-    color: #888;
+    color: rgb(56, 48, 48);
     font-weight: 800;
     cursor: pointer;
 }
@@ -37,11 +37,12 @@ body{
     top: 40px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .cats{
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 50px;
 }
 .cat_img{
@@ -124,6 +125,7 @@ body{
     background: #ffffe4;
     display: none;  
 }
+
 .conteiner_form{
     position: absolute;
     display: flex;
@@ -133,7 +135,7 @@ body{
 .conteiner_form>.form{
     position: relative;
     top: calc(50vh - 250px);
-    left: calc(50vw - 175px);
+    left: calc(50vw - 125px);
     width: 250px;
     height: auto;
     background: #fcfdbb;
@@ -169,3 +171,65 @@ button{
 .active{
     display: block;
 }
+
+.wrap__choose{
+    position: absolute;
+    top: 30px;
+    left: calc(50% - 620px);
+    margin-bottom: 30px;
+}
+.choose_content{
+    position: absolute;
+    top: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+.cat_choose{
+    position: relative;
+    top: 30px;
+    left:20px;
+    width: 250px;
+    height: 250px;
+    border: 1px solid #aaa5;
+    box-shadow: 0px 0px 6px 0px #aaa4;
+    border-radius: 10px;
+    background-color: rgba(252, 253, 187, 0.699);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+.left_card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    grid-column: 1/2;
+    padding: 20;
+
+}
+.right_card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    grid-column: 2/3;
+    padding: 20;
+
+}
+.bottum_card{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    color: #4f4d4d; 
+    grid-column: 1/3;
+}
+.choose_img{
+    width: 100px;
+    height: 70px;
+    border-radius: 10px;
+}
+
