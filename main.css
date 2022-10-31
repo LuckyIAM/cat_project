@@ -173,22 +173,22 @@ button{
 }
 
 .wrap__choose{
-    position: absolute;
+    position: relative;
     top: 30px;
-    left: calc(50% - 620px);
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
 }
 .choose_content{
     position: absolute;
-    top: 10px;
+    top: 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 .cat_choose{
     position: relative;
-    top: 30px;
-    left:20px;
     width: 250px;
     height: 250px;
     border: 1px solid #aaa5;
@@ -232,4 +232,3 @@ button{
     height: 70px;
     border-radius: 10px;
 }
-

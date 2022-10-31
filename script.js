@@ -220,6 +220,21 @@ function cheoseCat(form){
         }
         for(let i = 0; i<e.target.elements.length; i++){
             let tag = e.target.elements[i];
+            console.log(tag);
+            console.log(tag.name === 'age' && !(/^[0-9]{1,2}-[0-9]{1,2}/).test(tag.value),tag.value);
+            if(tag.name === 'age' && !(/^[0-9]{1,2}-[0-9]{1,2}/).test(tag.value)){
+                const warning = document.createElement('h3');
+                warning.innerHTML = `Вводите данные в формате "число"-"число". Пример: 5-10`;
+                wrpprChoose.append(warning);
+                chooseCatsFavourite = 0;
+                break;
+            } else if(tag.name ==='rate' && (/[0-9]{1,2}/).test(tag.value)){
+                const warning = document.createElement('h3');
+                warning.innerHTML = `Вводите данные в формате "число"-"число". Пример: 5-10`;
+                containerChooseCat.append(warning);
+                chooseCatsFavourite = 0;
+                break; 
+            }
             for(let c = 0; c<allcat.length;c++){
                 if(tag.name === 'age' && (/^[0-9]{1,2}-[0-9]{1,2}/).test(tag.value)){
                     // console.log(tag.value);
@@ -233,12 +248,6 @@ function cheoseCat(form){
                             // console.log(chooseCatsAge);
                         }
                     }
-                    
-                // }else if(tag.name === 'age' && (/[0-9]{1,2}/).test(tag.value)){
-                //     const warning = document.createElement('h3');
-                //     warning.innerHTML = `Вводите данные в формате "число"-"число". Пример: 5-10`;
-                //     containerChooseCat.append(warning);
-
                 }else if(tag.name === 'age' && tag.value === ''){
                     chooseCatsAge.push(allcat[c])
                 }
@@ -275,11 +284,12 @@ function cheoseCat(form){
                 
             }        
         }
-        console.log(chooseCatsFavourite);
+        console.log(typeof chooseCatsFavourite);
 
-        if(chooseCatsFavourite.length ===0){
-            containerChooseCat.innerHTML = `<p style="font-size: 25px; text-align: center;"> 
-            Катов с такими параметрами не обнаружено!</p>`
+        if(typeof chooseCatsFavourite === 'object' && chooseCatsFavourite.length ===0){
+            const warning = document.createElement('h3');
+            warning.innerHTML = `Катов с такими параметрами не обнаружено!`;
+            wrpprChoose.append(warning);
         } else{
             for(let cat = 0; cat<chooseCatsFavourite.length; cat++){
                 console.log(chooseCatsFavourite[cat]);

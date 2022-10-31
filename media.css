@@ -33,18 +33,16 @@
     }
    
     .wrap__choose{
-        left: calc(50% - 125px);
-        gap: 0;
-        padding-bottom: 20px;
+        position: relative;
+        top: 30px;
+        margin: 20px;
     }
     .choose_content{
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 5px;
     }
     .cat_choose{
         position: relative;
-        left: 10px;
-        width: 250px;
         height: auto;
     }
     .left_card{
