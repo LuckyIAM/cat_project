@@ -2,7 +2,7 @@ import Api from "./api.js"
 
 
 let storecat = [];
-const api = new Api('LuckyIAM');
+const api = new Api('LuckyIAm');
 const menu  = [...document.querySelectorAll('.menu_item div')];
 const wraperForm = document.querySelector('.wraper_form');
 const wraperFormUp = document.querySelector('.wraper_form_update');

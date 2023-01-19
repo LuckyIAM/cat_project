@@ -1,7 +1,7 @@
 class Api{
     constructor(name){
         this.name = name;
-        this.path = "https://sb-cats.herokuapp.com/api/2/";
+        this.path = "https://srv.petiteweb.dev/api/2/";
     }
     addCat(self){
         return fetch(`${this.path}${this.name}/add`, {
